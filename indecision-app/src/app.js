@@ -30,7 +30,7 @@ const render = () => {
             <p>{app.options && app.options.length > 0 ? 'Here are your options' : 'No options'}</p>
             <button onClick={onRemoveAll}>Remove All</button>
             <ol>
-                {app.options.map(option => <li>{option}</li>)}
+                {app.options.map((option, i) => <li key={i}>{option}</li>)}
             </ol>
             <form onSubmit={onFormSubmit}>
                 <input type="text" name="option"/>

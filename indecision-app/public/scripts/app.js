@@ -49,9 +49,9 @@ const render = () => {
         React.createElement(
             'ol',
             null,
-            app.options.map(option => React.createElement(
+            app.options.map((option, i) => React.createElement(
                 'li',
-                null,
+                { key: i },
                 option
             ))
         ),
