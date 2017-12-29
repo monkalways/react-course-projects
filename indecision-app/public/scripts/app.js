@@ -2,7 +2,7 @@ class IndecisionApp extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            options: []
+            options: props.options
         };
 
         this.onRemoveAll = this.onRemoveAll.bind(this);
@@ -41,10 +41,7 @@ class IndecisionApp extends React.Component {
         return React.createElement(
             'div',
             null,
-            React.createElement(Header, {
-                title: title,
-                subtitle: subtitle
-            }),
+            React.createElement(Header, { subtitle: subtitle }),
             React.createElement(Action, {
                 hasOptions: options && options.length > 0,
                 onMakeDecision: this.onMakeDecision
@@ -58,77 +55,74 @@ class IndecisionApp extends React.Component {
     }
 }
 
-class Header extends React.Component {
-    render() {
-        const { title, subtitle } = this.props;
-        return React.createElement(
-            'div',
-            null,
-            React.createElement(
-                'h1',
-                null,
-                title
-            ),
-            React.createElement(
-                'h2',
-                null,
-                subtitle
-            )
-        );
-    }
-}
+IndecisionApp.defaultProps = {
+    options: []
+};
 
-class Action extends React.Component {
-    render() {
-        const { hasOptions, onMakeDecision } = this.props;
-        return React.createElement(
-            'div',
+const Header = props => {
+    const { title, subtitle } = props;
+    return React.createElement(
+        'div',
+        null,
+        React.createElement(
+            'h1',
             null,
-            React.createElement(
-                'button',
-                {
-                    disabled: !hasOptions,
-                    onClick: onMakeDecision
-                },
-                'What should I do?'
-            )
-        );
-    }
-}
+            title
+        ),
+        subtitle && React.createElement(
+            'h2',
+            null,
+            subtitle
+        )
+    );
+};
 
-class Options extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-    render() {
-        const { options, onRemoveAll } = this.props;
-        return React.createElement(
-            'div',
-            null,
-            React.createElement(
-                'button',
-                { onClick: onRemoveAll },
-                'Remove All'
-            ),
-            React.createElement(
-                'ul',
-                null,
-                options.map((option, i) => React.createElement(Option, { key: i, optionText: option }))
-            )
-        );
-    }
-}
+Header.defaultProps = {
+    title: 'Indecision'
+};
 
-class Option extends React.Component {
-    render() {
-        const { optionText } = this.props;
-        return React.createElement(
-            'li',
+const Action = props => {
+    const { hasOptions, onMakeDecision } = props;
+    return React.createElement(
+        'div',
+        null,
+        React.createElement(
+            'button',
+            {
+                disabled: !hasOptions,
+                onClick: onMakeDecision
+            },
+            'What should I do?'
+        )
+    );
+};
+
+const Options = props => {
+    const { options, onRemoveAll } = props;
+    return React.createElement(
+        'div',
+        null,
+        React.createElement(
+            'button',
+            { onClick: onRemoveAll },
+            'Remove All'
+        ),
+        React.createElement(
+            'ul',
             null,
-            optionText
-        );
-    }
-}
+            options.map((option, i) => React.createElement(Option, { key: i, optionText: option }))
+        )
+    );
+};
+
+const Option = props => {
+    const { optionText } = props;
+    return React.createElement(
+        'li',
+        null,
+        optionText
+    );
+};
 
 class AddOption extends React.Component {
     constructor(props) {
