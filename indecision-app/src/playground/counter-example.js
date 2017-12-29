@@ -1,29 +1,42 @@
-let count = 0;
-const addOne = () => {
-    count++;
-    renderCounterApp();
-};
-const minusOne = () => {
-    count--;
-    renderCounterApp();
-};
-const reset = () => {
-    count = 0;
-    renderCounterApp();
-};
+class Counter extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            count: 0
+        };
 
-const target = document.querySelector('#app');
+        this.onIncrease = this.onIncrease.bind(this);
+        this.onDecrease = this.onDecrease.bind(this);
+        this.onReset = this.onReset.bind(this);
+    }
+    onIncrease() {
+        const count = this.state.count + 1;
+        this.setState(prevState => ({
+            count: count
+        }));
+    }
+    onDecrease() {
+        const count = this.state.count - 1;
+        this.setState({
+            count: count
+        });
+    }
+    onReset() {
+        this.setState({
+            count: 0
+        });
+    }
+    render() {
+        const {count} = this.state;
+        return (
+            <div>
+                <h1>Count: {count}</h1>
+                <button onClick={this.onIncrease}>+1</button>
+                <button onClick={this.onDecrease}>-1</button>
+                <button onClick={this.onReset}>Reset</button>
+            </div>
+        );
+    }
+}
 
-const renderCounterApp = () => {
-    const templateTwo = (
-        <div>
-            <h1>Count: {count}</h1>
-            <button onClick={addOne}>+1</button>
-            <button onClick={minusOne}>-1</button>
-            <button onClick={reset}>reset</button>
-        </div>
-    );
-    ReactDOM.render(templateTwo, target);
-};
-
-renderCounterApp();
+ReactDOM.render(<Counter/>, document.getElementById('app'));
