@@ -8,6 +8,29 @@ class IndecisionApp extends React.Component {
         this.onRemoveAll = this.onRemoveAll.bind(this);
         this.onMakeDecision = this.onMakeDecision.bind(this);
         this.onAddOption = this.onAddOption.bind(this);
+        this.onRemoveOption = this.onRemoveOption.bind(this);
+    }
+    componentDidMount() {
+        try {
+            const json = localStorage.getItem('options');
+            if (json) {
+                const options = JSON.parse(json);
+                this.setState({
+                    options
+                });
+            }
+        } catch (e) {
+            // do nothing at all
+        }
+    }
+    componentDidUpdate(prevProps, prevState) {
+        if (prevState.options.length != this.state.options.length) {
+            const json = JSON.stringify(this.state.options);
+            localStorage.setItem('options', json);
+        }
+    }
+    componentWillUnmount() {
+        console.log('componentWillUnmount');
     }
     onAddOption(option) {
         const { options } = this.state;
@@ -20,6 +43,11 @@ class IndecisionApp extends React.Component {
 
         this.setState({
             options: [...options, option]
+        });
+    }
+    onRemoveOption(option) {
+        this.setState({
+            options: this.state.options.filter(o => o !== option)
         });
     }
     onRemoveAll() {
@@ -48,7 +76,8 @@ class IndecisionApp extends React.Component {
             }),
             React.createElement(Options, {
                 options: options,
-                onRemoveAll: this.onRemoveAll
+                onRemoveAll: this.onRemoveAll,
+                onRemoveOption: this.onRemoveOption
             }),
             React.createElement(AddOption, { onAddOption: this.onAddOption })
         );
@@ -98,7 +127,7 @@ const Action = props => {
 };
 
 const Options = props => {
-    const { options, onRemoveAll } = props;
+    const { options, onRemoveAll, onRemoveOption } = props;
     return React.createElement(
         'div',
         null,
@@ -107,20 +136,34 @@ const Options = props => {
             { onClick: onRemoveAll },
             'Remove All'
         ),
+        options.length === 0 && React.createElement(
+            'p',
+            null,
+            'Please add an option to get started!'
+        ),
         React.createElement(
             'ul',
             null,
-            options.map((option, i) => React.createElement(Option, { key: i, optionText: option }))
+            options.map((option, i) => React.createElement(Option, {
+                key: i,
+                optionText: option,
+                onRemoveOption: onRemoveOption
+            }))
         )
     );
 };
 
 const Option = props => {
-    const { optionText } = props;
+    const { optionText, onRemoveOption } = props;
     return React.createElement(
         'li',
         null,
-        optionText
+        optionText,
+        React.createElement(
+            'button',
+            { onClick: () => onRemoveOption(optionText) },
+            'Remove'
+        )
     );
 };
 

@@ -8,6 +8,30 @@ class IndecisionApp extends React.Component {
         this.onRemoveAll = this.onRemoveAll.bind(this);
         this.onMakeDecision = this.onMakeDecision.bind(this);
         this.onAddOption = this.onAddOption.bind(this);
+        this.onRemoveOption = this.onRemoveOption.bind(this);
+    }
+    componentDidMount() {
+        try {
+            const json = localStorage.getItem('options');
+            if(json) {
+                const options = JSON.parse(json);
+                this.setState({
+                    options
+                });
+            }
+        } catch (e) {
+            // do nothing at all
+        }
+        
+    }
+    componentDidUpdate(prevProps, prevState) {
+        if(prevState.options.length != this.state.options.length) {
+            const json = JSON.stringify(this.state.options);
+            localStorage.setItem('options', json);
+        }
+    }
+    componentWillUnmount() {
+        console.log('componentWillUnmount');
     }
     onAddOption(option) {
         const {options} = this.state;
@@ -23,6 +47,11 @@ class IndecisionApp extends React.Component {
                 ...options,
                 option
             ]
+        });
+    }
+    onRemoveOption(option) {
+        this.setState({
+            options: this.state.options.filter(o => o !== option)
         });
     }
     onRemoveAll() {
@@ -50,7 +79,8 @@ class IndecisionApp extends React.Component {
                 />
                 <Options
                     options={options}
-                    onRemoveAll={this.onRemoveAll} 
+                    onRemoveAll={this.onRemoveAll}
+                    onRemoveOption={this.onRemoveOption}
                 />
                 <AddOption onAddOption={this.onAddOption}/>
             </div>
@@ -91,23 +121,29 @@ const Action = (props) => {
 };
 
 const Options = (props) => {
-    const {options, onRemoveAll} = props;
+    const {options, onRemoveAll, onRemoveOption} = props;
     return (
         <div>
             <button onClick={onRemoveAll}>Remove All</button>
+            {options.length === 0 && <p>Please add an option to get started!</p>}
             <ul>
                 {options.map((option, i) => 
-                    <Option key={i} optionText={option}></Option>)}
+                    <Option 
+                        key={i} 
+                        optionText={option}
+                        onRemoveOption={onRemoveOption}
+                    />)}
             </ul>
         </div>
     );
 }
 
 const Option = (props) => {
-    const {optionText} = props;
+    const {optionText, onRemoveOption} = props;
     return (
         <li>
             {optionText}
+            <button onClick={() => onRemoveOption(optionText)}>Remove</button>
         </li>
     );
 }
@@ -127,7 +163,7 @@ class AddOption extends React.Component {
         const option = e.target.elements.option.value.trim();
         
         const error = onAddOption(option);
-        this.setState({
+        this.setState({ 
             error
         });
         e.target.elements.option.focus();
