@@ -1,15 +1,15 @@
 import React from 'react';
 import Modal from 'react-modal';
 
-const OptionModal = (props) => (
+const OptionModal = ({selectedOption, onCloseModal}) => (
     <Modal
-        isOpen={!!props.selectedOption}
-        onRequestClose={props.onCloseModal}
+        isOpen={!!selectedOption}
+        onRequestClose={onCloseModal}
         ariaHideApp={false}
     >
         <h3>Selected Option</h3>
-        {props.selectedOption && <p>{props.selectedOption}</p>}
-        <button onClick={props.onCloseModal}>Okay</button>
+        {selectedOption && <p>{selectedOption}</p>}
+        <button onClick={onCloseModal}>Okay</button>
     </Modal>
 );
 
