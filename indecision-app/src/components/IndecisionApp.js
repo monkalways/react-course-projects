@@ -4,10 +4,12 @@ import Header from './Header';
 import Action from './Action';
 import AddOption from './AddOption';
 import Options from './Options';
+import OptionModal from './OptionModal';
 
 export default class IndecisionApp extends React.Component {
     state = {
-        options: this.props.options
+        options: this.props.options,
+        selectedOption: undefined
     };
 
     onAddOption = (option) => {
@@ -43,8 +45,16 @@ export default class IndecisionApp extends React.Component {
         const {options} = this.state;
         if(options) {
             const randomNum = Math.floor(Math.random() * options.length);
-            alert(options[randomNum]);
+            this.setState({
+                selectedOption: options[randomNum]
+            });
         }
+    };
+
+    onClearSelectedOption = () => {
+        this.setState({
+            selectedOption: undefined
+        });
     };
 
     componentDidMount() {
@@ -76,7 +86,7 @@ export default class IndecisionApp extends React.Component {
     render() {
         const title = 'Indecision';
         const subtitle = 'Put your life in the hands of a computer';
-        const {options} = this.state;
+        const {options, selectedOption} = this.state;
         return (
             <div>
                 <Header subtitle={subtitle}/>
@@ -89,7 +99,13 @@ export default class IndecisionApp extends React.Component {
                     onRemoveAll={this.onRemoveAll}
                     onRemoveOption={this.onRemoveOption}
                 />
-                <AddOption onAddOption={this.onAddOption}/>
+                <AddOption 
+                    onAddOption={this.onAddOption}
+                />
+                <OptionModal 
+                    selectedOption={selectedOption}
+                    onCloseModal={this.onClearSelectedOption}
+                />
             </div>
         );
     }
