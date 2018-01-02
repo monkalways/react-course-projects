@@ -6,41 +6,11 @@ import AddOption from './AddOption';
 import Options from './Options';
 
 export default class IndecisionApp extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            options: props.options
-        };
+    state = {
+        options: this.props.options
+    };
 
-        this.onRemoveAll = this.onRemoveAll.bind(this);
-        this.onMakeDecision = this.onMakeDecision.bind(this);
-        this.onAddOption = this.onAddOption.bind(this);
-        this.onRemoveOption = this.onRemoveOption.bind(this);
-    }
-    componentDidMount() {
-        try {
-            const json = localStorage.getItem('options');
-            if(json) {
-                const options = JSON.parse(json);
-                this.setState({
-                    options
-                });
-            }
-        } catch (e) {
-            // do nothing at all
-        }
-        
-    }
-    componentDidUpdate(prevProps, prevState) {
-        if(prevState.options.length != this.state.options.length) {
-            const json = JSON.stringify(this.state.options);
-            localStorage.setItem('options', json);
-        }
-    }
-    componentWillUnmount() {
-        console.log('componentWillUnmount');
-    }
-    onAddOption(option) {
+    onAddOption = (option) => {
         const {options} = this.state;
 
         if(!option) {
@@ -55,24 +25,54 @@ export default class IndecisionApp extends React.Component {
                 option
             ]
         });
-    }
-    onRemoveOption(option) {
+    };
+
+    onRemoveOption = (option) => {
         this.setState({
             options: this.state.options.filter(o => o !== option)
         });
-    }
-    onRemoveAll() {
+    };
+
+    onRemoveAll = () => {
         this.setState({
             options: []
         });
-    }
-    onMakeDecision() {
+    };
+    
+    onMakeDecision = () => {
         const {options} = this.state;
         if(options) {
             const randomNum = Math.floor(Math.random() * options.length);
             alert(options[randomNum]);
         }
+    };
+
+    componentDidMount() {
+        try {
+            const json = localStorage.getItem('options');
+            if(json) {
+                const options = JSON.parse(json);
+                this.setState({
+                    options
+                });
+            }
+        } catch (e) {
+            // do nothing at all
+        }
+        
     }
+
+    componentDidUpdate(prevProps, prevState) {
+        if(prevState.options.length != this.state.options.length) {
+            const json = JSON.stringify(this.state.options);
+            localStorage.setItem('options', json);
+        }
+    }
+
+    componentWillUnmount() {
+        console.log('componentWillUnmount');
+    }
+    
     render() {
         const title = 'Indecision';
         const subtitle = 'Put your life in the hands of a computer';
