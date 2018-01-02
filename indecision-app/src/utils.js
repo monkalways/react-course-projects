@@ -4,4 +4,8 @@ export const square = (x) => x * x;
 
 export const add = (a, b) => a + b;
 
-// export { square, add }; // named exports
+const subtrack = (a, b) => a - b;
+
+export default subtrack;
+
+// export { square, add, subtrack as default }; // named exports
