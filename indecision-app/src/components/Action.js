@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Action = ({hasOptions, onMakeDecision}) => (
+const Action = ({hasOptions, onMakeDecision}) => 
     <div>
         <button 
             className="big-button"
@@ -10,6 +10,6 @@ const Action = ({hasOptions, onMakeDecision}) => (
             What should I do?
         </button>
     </div>
-);
 
-export default Action;
+
+export default Action
