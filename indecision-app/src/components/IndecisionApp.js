@@ -7,6 +7,17 @@ import Options from './Options';
 import OptionModal from './OptionModal';
 
 export default class IndecisionApp extends React.Component {
+
+    // Use Class Static Properties to define default props and 
+    // validations.
+    static propTypes = {
+        options: React.PropTypes.array
+    };
+    
+    static defaultProps = {
+        options: []
+    };
+
     state = {
         options: this.props.options,
         selectedOption: undefined
@@ -115,6 +126,6 @@ export default class IndecisionApp extends React.Component {
     }
 }
 
-IndecisionApp.defaultProps = {
-    options: []
-};
+// IndecisionApp.defaultProps = {
+//     options: []
+// };
