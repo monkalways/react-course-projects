@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Header from './Header';
 import Action from './Action';
@@ -11,7 +12,7 @@ export default class IndecisionApp extends React.Component {
     // Use Class Static Properties to define default props and 
     // validations.
     static propTypes = {
-        options: React.PropTypes.array
+        options: PropTypes.array
     };
     
     static defaultProps = {
