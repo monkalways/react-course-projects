@@ -30,4 +30,4 @@ const jsx = (
     </Provider>
 );
 
-ReactDOM.render(jsx, document.getElementById("app"));
+ReactDOM.render(jsx, document.getElementById('app'));
