@@ -1,4 +1,4 @@
-import 'react-dates/initialize';
+import 'react-dates/initialize'; // to make react-dates work
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
