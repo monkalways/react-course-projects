@@ -1,7 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`should render ExpenseDashboardPage 1`] = `
+exports[`should render ExpenseDashboardPage with multiple expenses 1`] = `
 <div>
+  <p>
+    Viewing 3 expenses totalling $1,141.95
+  </p>
+  <Connect(ExpenseListFilters) />
+  <Connect(ExpenseList) />
+</div>
+`;
+
+exports[`should render ExpenseDashboardPage with single expense 1`] = `
+<div>
+  <p>
+    Viewing 1 expense totalling $1.95
+  </p>
   <Connect(ExpenseListFilters) />
   <Connect(ExpenseList) />
 </div>
