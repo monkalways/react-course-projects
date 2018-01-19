@@ -13,7 +13,7 @@ import getVisibleExpenses from './selectors/expenses';
 import 'normalize.css/normalize.css';
 import 'react-dates/lib/css/_datepicker.css';
 import './styles/styles.scss';
-import { setTimeout } from 'timers';
+// import { setTimeout } from 'timers';
 
 // Exposes the React library globally in the browser, 
 // which ensures all calls to React.createElement are assured to work.
