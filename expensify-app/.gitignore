@@ -1,8 +1,8 @@
-/node_modules
-bundle.js
-bundle.js.map
-/public/styles.css
-styles.css.map
+node_modules
+public/bundle.js
+public/bundle.js.map
+public/styles.css
+public/styles.css.map
 npm-debug.log
 .DS_Store
 
