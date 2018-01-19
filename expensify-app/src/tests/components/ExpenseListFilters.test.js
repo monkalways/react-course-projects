@@ -59,7 +59,7 @@ test('should update dates on date change', () => {
 });
 
 test('should update focus on focus change', () => {
-    const focused = true;
+    const focused = null;
     wrapper.find('withStyles(DateRangePicker)')
         .prop('onFocusChange')(focused);
     expect(wrapper.state().calendarFocused).toEqual(focused);
