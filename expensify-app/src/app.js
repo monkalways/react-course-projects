@@ -21,10 +21,6 @@ window.React = React;
 
 const store = configureStore();
 
-store.dispatch(addExpense({ description: 'Water bill', amount: 99999, createdAt: moment('2018-01-01').valueOf() }));
-store.dispatch(addExpense({ description: 'Gas bill', createdAt: moment('2018-01-31').valueOf() }));
-store.dispatch(addExpense({ description: 'Rent', amount: 109555, createdAt: moment('2018-02-01').valueOf() }));
-
 const jsx = (
     <Provider store={store}>
         <AppRouter />
