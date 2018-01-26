@@ -2,16 +2,9 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 
-import { addExpense, editExpense, removeExpense, startAddExpense, startRemoveExpense } from '../../actions/expenses';
+import { addExpense, editExpense, removeExpense, startAddExpense, startRemoveExpense, setExpenses, startSetExpenses } from '../../actions/expenses';
 import expenses from '../fixtures/expenses';
 import { setTimeout } from 'timers';
-
-const globalTunnel = require('global-tunnel');
-
-globalTunnel.initialize({
-  host: 'epsvc%5Cweiw:!Edmonton3@proxy.police.edmonton.ab.ca',
-  port: 8080
-});
 
 const createMockStore = configureMockStore([thunk]);
 
@@ -74,8 +67,12 @@ test('should setup add expense action object with provided values', () => {
 //     });
 // });
 
-test('should add expense with defaults to database and store', () => {
-
+test('should setup set expenses action object with data', () => {
+    const result = setExpenses(expenses);
+    expect(result).toEqual({
+        type: 'SET_EXPENSES',
+        expenses
+    });
 });
 
 // test('should remove expense from firebase', (done) => {
@@ -90,17 +87,3 @@ test('should add expense with defaults to database and store', () => {
 //       done();
 //     });
 //   });
-
-// test('should setup add expense action object with default values', () => {
-//     const action = addExpense();
-//     expect(action).toEqual({
-//         type: 'ADD_EXPENSE',
-//         expense: {
-//             id: expect.any(String),
-//             description: '',
-//             note: '',
-//             amount: 0,
-//             createdAt: 0
-//         }
-//     });
-// });
