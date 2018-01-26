@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render login page 1`] = `
+<div>
+  <Header
+    as="h1"
+  >
+    Login
+  </Header>
+  <Form
+    as="form"
+  >
+    <Button
+      as="button"
+      primary={true}
+      type="button"
+    >
+      Login from Google
+    </Button>
+  </Form>
+</div>
+`;

@@ -10,9 +10,11 @@ import { addExpense } from './actions/expenses';
 import { setTextFilter } from './actions/filters';
 import getVisibleExpenses from './selectors/expenses';
 import { startSetExpenses } from './actions/expenses';
+import { firebase } from './firebase/firebase';
 
 import 'normalize.css/normalize.css';
 import 'react-dates/lib/css/_datepicker.css';
+import 'semantic-ui-css/semantic.min.css';
 import './styles/styles.scss';
 // import { setTimeout } from 'timers';
 
@@ -34,4 +36,11 @@ store.dispatch(startSetExpenses()).then(() => {
     ReactDOM.render(jsx, document.getElementById('app'));
 });
 
+firebase.auth().onAuthStateChanged( (user) => {
+    if (user) {
+        console.log('login');
+    } else {
+        console.log('log out');
+    }
+});
 

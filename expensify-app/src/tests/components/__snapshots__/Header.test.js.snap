@@ -1,24 +1,39 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`should render Header 1`] = `
-<header>
-  <h1>
-    Expensify
-  </h1>
-  <NavLink
-    activeClassName="is-active"
-    ariaCurrent="true"
-    exact={true}
-    to="/"
-  >
-    Dashboard
-  </NavLink>
-  <NavLink
-    activeClassName="is-active"
-    ariaCurrent="true"
+<Menu
+  color="grey"
+  fixed="top"
+  inverted={true}
+  size="large"
+>
+  <MenuItem
+    active={true}
+    as={[Function]}
+    key="dashboard"
+    name="dashboard"
+    onClick={[Function]}
+    to="/dashboard"
+  />
+  <MenuItem
+    active={false}
+    as={[Function]}
+    key="create"
+    name="create expense"
+    onClick={[Function]}
     to="/create"
+  />
+  <MenuItem
+    name="logout"
+  />
+  <MenuItem
+    position="right"
   >
-    Create Expense
-  </NavLink>
-</header>
+    <Icon
+      as="i"
+      name="calendar"
+    />
+    Add Expense
+  </MenuItem>
+</Menu>
 `;
