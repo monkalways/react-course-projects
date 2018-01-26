@@ -41,13 +41,12 @@ export const removeExpense = ({ id } = {}) => ({
 });
 
 export const startRemoveExpense = ({ id } = {}) => {
-    return (dispatch, getState) => {
-    //   const uid = getState().auth.uid;
-      return database.ref(`expenses/${id}`).remove().then(() => {
-        dispatch(removeExpense({ id }));
-      });
+    return (dispatch) => {
+        return database.ref(`expenses/${id}`).remove().then(() => {
+            dispatch(removeExpense({id}));
+        });
     };
-  };
+};
 
 // EDIT_EXPENSE
 export const editExpense = (id, updates) => ({
