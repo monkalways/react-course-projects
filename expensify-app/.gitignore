@@ -5,6 +5,8 @@ public/dist/styles.css
 public/dist/styles.css.map
 npm-debug.log
 .DS_Store
+.env.test
+.env.development
 
 # IntelliJ
 *.iml
