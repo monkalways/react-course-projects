@@ -1,19 +1,30 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
-import thunk from 'redux-thunk';
+import thunkMiddleware from 'redux-thunk';
+import { routerReducer, routerMiddleware } from 'react-router-redux';
+import loggerMiddleware from 'redux-logger'
 
 import expensesReducer from '../reducers/expenses';
 import filtersReducer from '../reducers/filters';
+import authReducer from '../reducers/auth';
 
-const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-export default () => {
+export default (history) => {
+    const middlewares = [
+        // loggerMiddleware,
+        thunkMiddleware,
+        routerMiddleware(history)
+    ];
+
     /* eslint-disable no-underscore-dangle */
     const store = createStore(
         combineReducers({
             expenses: expensesReducer,
-            filters: filtersReducer
+            filters: filtersReducer,
+            auth: authReducer,
+            router: routerReducer // Add the reducer to your store on the `router` key
         }),
-        composeEnhancer(applyMiddleware(thunk))
+        composeEnhancers(applyMiddleware(...middlewares)) // apply router middleware for navigating
         // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
     );
     /* eslint-enable */

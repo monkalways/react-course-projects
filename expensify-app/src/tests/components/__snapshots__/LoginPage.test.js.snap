@@ -12,6 +12,7 @@ exports[`should render login page 1`] = `
   >
     <Button
       as="button"
+      onClick={[MockFunction]}
       primary={true}
       type="button"
     >

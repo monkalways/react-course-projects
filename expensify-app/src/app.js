@@ -3,6 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import moment from 'moment';
+import createHistory from 'history/createBrowserHistory';
 
 import AppRouter from './routers/AppRouter';
 import configureStore from './store/configureStore';
@@ -22,25 +23,31 @@ import './styles/styles.scss';
 // which ensures all calls to React.createElement are assured to work.
 window.React = React;
 
-const store = configureStore();
+const history = createHistory();
+const store = configureStore(history);
 
 const jsx = (
     <Provider store={store}>
-        <AppRouter />
+        <AppRouter history={history} />
     </Provider>
 );
 
-ReactDOM.render(<p>Loading...</p>, document.getElementById('app'));
+ReactDOM.render(jsx, document.getElementById('app'));
 
-store.dispatch(startSetExpenses()).then(() => {
-    ReactDOM.render(jsx, document.getElementById('app'));
-});
+// let hasRendered = false;
+// const renderApp = () => {
+//     if(!hasRendered) {
+//         ReactDOM.render(jsx, document.getElementById('app'));
+//         hasRendered = true;
+//     }
+// };
+
+// ReactDOM.render(<p>Loading...</p>, document.getElementById('app'));
 
 firebase.auth().onAuthStateChanged( (user) => {
     if (user) {
-        console.log('login');
+        console.log('login', user.uid);
     } else {
-        console.log('log out');
+        console.log('logout');
     }
 });
-

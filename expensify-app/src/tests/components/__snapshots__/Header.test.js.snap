@@ -24,16 +24,14 @@ exports[`should render Header 1`] = `
     to="/create"
   />
   <MenuItem
-    name="logout"
-  />
-  <MenuItem
     position="right"
   >
-    <Icon
-      as="i"
-      name="calendar"
-    />
-    Add Expense
+    <Button
+      as="button"
+      onClick={[Function]}
+    >
+      Logout
+    </Button>
   </MenuItem>
 </Menu>
 `;
