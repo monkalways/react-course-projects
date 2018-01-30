@@ -1,11 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`should render login page 1`] = `
-<div>
+<Segment
+  basic={true}
+  padded="very"
+>
   <Header
     as="h1"
   >
-    Login
+    Expensify
   </Header>
   <Form
     as="form"
@@ -19,5 +22,5 @@ exports[`should render login page 1`] = `
       Login from Google
     </Button>
   </Form>
-</div>
+</Segment>
 `;

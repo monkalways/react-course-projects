@@ -2,13 +2,13 @@
 
 exports[`should render Header 1`] = `
 <Menu
-  color="grey"
+  color="blue"
   fixed="top"
   inverted={true}
   size="large"
 >
   <MenuItem
-    active={true}
+    active={false}
     as={[Function]}
     key="dashboard"
     name="dashboard"
