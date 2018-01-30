@@ -12,6 +12,7 @@ import { setTextFilter } from './actions/filters';
 import getVisibleExpenses from './selectors/expenses';
 import { startSetExpenses } from './actions/expenses';
 import { firebase } from './firebase/firebase';
+import { startAfterLogin } from './actions/auth';
 
 import 'normalize.css/normalize.css';
 import 'react-dates/lib/css/_datepicker.css';
@@ -32,8 +33,6 @@ const jsx = (
     </Provider>
 );
 
-ReactDOM.render(jsx, document.getElementById('app'));
-
 // let hasRendered = false;
 // const renderApp = () => {
 //     if(!hasRendered) {
@@ -42,11 +41,13 @@ ReactDOM.render(jsx, document.getElementById('app'));
 //     }
 // };
 
-// ReactDOM.render(<p>Loading...</p>, document.getElementById('app'));
+ReactDOM.render(<p>Loading...</p>, document.getElementById('app'));
 
 firebase.auth().onAuthStateChanged( (user) => {
+    ReactDOM.render(jsx, document.getElementById('app'));
     if (user) {
         console.log('login', user.uid);
+        store.dispatch(startAfterLogin(user.uid));
     } else {
         console.log('logout');
     }

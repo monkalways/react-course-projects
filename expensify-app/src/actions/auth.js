@@ -6,15 +6,20 @@ import { startSetExpenses } from './expenses';
 export const startLogin = () => {
     return (dispatch) => {
         firebase.auth().signInWithPopup(googleAuthProvider).then((result) => {
-            dispatch(startSetExpenses()).then(() => {
-                dispatch(login(result.user.uid));
-                dispatch(push('/dashboard'));
-            });
+            dispatch(startAfterLogin(result.user.uid));
         }, (error) => {
             console.log('Google login error', error);
         });
     };
 };
+
+export const startAfterLogin = (uid) => {
+    return (dispatch) => {
+        dispatch(login(uid));
+        dispatch(push('/dashboard'));
+        dispatch(startSetExpenses());
+    };
+}
 
 export const login = (uid) => ({
     type: 'LOGIN',
