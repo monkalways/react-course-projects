@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render DashboardPage 1`] = `
+<div>
+  <div
+    style={
+      Object {
+        "marginBottom": "2rem",
+      }
+    }
+  >
+    <PageHeader>
+      <h1
+        style={
+          Object {
+            "fontWeight": 300,
+          }
+        }
+      >
+        Dashboard Page
+      </h1>
+    </PageHeader>
+  </div>
+</div>
+`;

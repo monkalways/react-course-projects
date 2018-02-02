@@ -1,6 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 import { SingleDatePicker } from 'react-dates';
+import { Button, Form, Input, TextArea } from 'semantic-ui-react';
 
 export default class ExpenseForm extends React.Component {
 
@@ -18,16 +19,16 @@ export default class ExpenseForm extends React.Component {
         };
     }
 
-    onDescriptionChange = (e) => {
-        const description = e.target.value;
+    onDescriptionChange = (e, data) => {
+        const description = data.value;
         this.setState(() => ({ description }));
     };
-    onNoteChange = (e) => {
-        const note = e.target.value;
+    onNoteChange = (e, data) => {
+        const note = data.value;
         this.setState(() => ({ note }));
     };
-    onAmountChange = (e) => {
-        const amount = e.target.value;
+    onAmountChange = (e, data) => {
+        const amount = data.value;
         if(!amount || amount.match(/^\d{1,}(\.\d{0,2})?$/)) { // validate number
             this.setState(() => ({ amount }));
         }
@@ -58,22 +59,29 @@ export default class ExpenseForm extends React.Component {
     }
     render() {
         return (
-            <div>
+            <Form onSubmit={this.onSubmit}>
                 {this.state.error || <p>{this.state.error}</p>}
-                <form onSubmit={this.onSubmit}>
-                    <input 
+                <Form.Field>
+                    <label>Description</label>
+                    <Input 
                         type="text"
                         placeholder="Description"
                         autoFocus
                         value={this.state.description}
                         onChange={this.onDescriptionChange}
                     />
-                    <input
+                </Form.Field>
+                <Form.Field>
+                    <label>Amount</label>
+                    <Input
                         type="text"
                         placeholder="Amount"
                         value={this.state.amount}
                         onChange={this.onAmountChange}
                     />
+                </Form.Field>
+                <Form.Field>
+                    <label>Created At</label>
                     <SingleDatePicker
                         date={this.state.createdAt}
                         onDateChange={this.onDateChange}
@@ -81,16 +89,20 @@ export default class ExpenseForm extends React.Component {
                         onFocusChange={this.onCalendarFocusChange}
                         numberOfMonths={1}
                         isOutsideRange={(day) => false}
+                        showDefaultInputIcon
                     />
-                    <textarea
+                </Form.Field>
+                <Form.Field>
+                    <label>Note</label>
+                    <TextArea
                         placeholder="Add a note for your expense (optional)"
                         value={this.state.note}
                         onChange={this.onNoteChange}
                     >
-                    </textarea>
-                    <button type="submit">{this.state.id ? 'Edit Expense' : 'Add Expense'}</button>
-                </form>
-            </div>
+                    </TextArea>
+                </Form.Field>
+                <Button type="submit" primary>Save Expense</Button>
+            </Form>
         );
     }
 }

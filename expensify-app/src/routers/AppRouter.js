@@ -15,7 +15,7 @@ import PublicRoute from './PublicRoute';
 
 const AppRouter = ({ history }) => (
     <ConnectedRouter history={history}>
-        <Container>
+        <div>
             <Switch>
                 <PublicRoute path="/" component={LoginPage} exact={true} />
                 <PrivateRoute path="/dashboard" component={ExpenseDashboardPage} />
@@ -24,7 +24,7 @@ const AppRouter = ({ history }) => (
                 <Route path="/help" component={HelpPage} />
                 <Route component={NotFoundPage} />
             </Switch>
-        </Container>
+        </div>
     </ConnectedRouter>
 );
 

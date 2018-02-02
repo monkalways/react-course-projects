@@ -16,11 +16,10 @@ export class Header extends React.Component {
     };
 
     render() {
-        const { activeMenu } = this.props; 
+        const { activeMenu } = this.props;
         return (
-            <Menu color="blue" inverted fixed="top" size="large">
-                <Menu.Item key="dashboard" name="dashboard" to="/dashboard" as={Link} active={activeMenu === 'dashboard'} onClick={this.handleItemClick} />
-                <Menu.Item key="create" name="create expense" to="/create" as={Link} active={activeMenu === 'create expense'}  onClick={this.handleItemClick} />
+            <Menu color="blue" inverted fixed="top" size="huge">
+                <Menu.Item header key="dashboard" name="expensify" to="/dashboard" as={Link} active={activeMenu === 'dashboard'} onClick={this.handleItemClick} />
                 
                 <Menu.Item position="right">
                     <Button onClick={this.handleLogout}>Logout</Button>

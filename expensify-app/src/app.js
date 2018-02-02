@@ -13,6 +13,7 @@ import getVisibleExpenses from './selectors/expenses';
 import { startSetExpenses } from './actions/expenses';
 import { firebase } from './firebase/firebase';
 import { startAfterLogin } from './actions/auth';
+import LoadingPage from './components/LoadingPage';
 
 import 'normalize.css/normalize.css';
 import 'react-dates/lib/css/_datepicker.css';
@@ -33,15 +34,7 @@ const jsx = (
     </Provider>
 );
 
-// let hasRendered = false;
-// const renderApp = () => {
-//     if(!hasRendered) {
-//         ReactDOM.render(jsx, document.getElementById('app'));
-//         hasRendered = true;
-//     }
-// };
-
-ReactDOM.render(<p>Loading...</p>, document.getElementById('app'));
+ReactDOM.render(<LoadingPage />, document.getElementById('app'));
 
 firebase.auth().onAuthStateChanged( (user) => {
     ReactDOM.render(jsx, document.getElementById('app'));

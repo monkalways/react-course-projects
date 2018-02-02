@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Table } from 'semantic-ui-react';
 
 import ExpenseListItem from './ExpenseListItem';
 import selectExpenses from '../selectors/expenses';
@@ -10,9 +11,20 @@ export const ExpenseList = ({ expenses }) => (
             expenses.length === 0 ? (
                 <p>No expenses</p>
             ) : (
-                expenses.map(expense => (
-                    <ExpenseListItem key={expense.id} {...expense} />
-                ))
+                <Table stackable>
+                    <Table.Header>
+                    <Table.Row>
+                        <Table.HeaderCell>Expense</Table.HeaderCell>
+                        <Table.HeaderCell>Amount</Table.HeaderCell>
+                    </Table.Row>
+                    </Table.Header>
+                    <Table.Body>
+                        {expenses.map(expense => (
+                            <ExpenseListItem key={expense.id} {...expense} />
+                        ))}
+                    </Table.Body>
+                </Table>
+                
             )
         }
     </div>

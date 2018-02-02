@@ -1,8 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Button } from 'semantic-ui-react';
 
 import ExpenseForm from './ExpenseForm';
+import PageHeader from './PageHeader';
 import { startEditExpense, startRemoveExpense } from '../actions/expenses';
+
+const removeButtonContainerStyle = {
+    marginTop: '14px'
+};
 
 export const EditExpensePage = ({ expense, startEditExpense, startRemoveExpense, history }) => {
 
@@ -18,11 +24,16 @@ export const EditExpensePage = ({ expense, startEditExpense, startRemoveExpense,
 
     return (
         <div>
+            <PageHeader>
+                <h1>Edit Expense</h1>
+            </PageHeader>
             <ExpenseForm
                 expense={expense}
                 onSubmit={onSubmit}
             />
-            <button onClick={onRemoveExpense}>Remove</button>
+            <div style={removeButtonContainerStyle}>
+                <Button onClick={onRemoveExpense}>Remove Expense</Button>
+            </div>
         </div>
     );
 };

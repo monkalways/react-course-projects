@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render Header 1`] = `
+<Menu
+  color="blue"
+  fixed="top"
+  inverted={true}
+  size="huge"
+>
+  <MenuItem
+    active={false}
+    as={[Function]}
+    header={true}
+    key="dashboard"
+    name="boilerplate"
+    onClick={[Function]}
+    to="/dashboard"
+  />
+  <MenuItem
+    position="right"
+  >
+    <Button
+      as="button"
+      onClick={[Function]}
+    >
+      Logout
+    </Button>
+  </MenuItem>
+</Menu>
+`;

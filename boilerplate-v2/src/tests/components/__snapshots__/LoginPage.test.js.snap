@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render login page 1`] = `
+<div
+  className="box-layout"
+>
+  <div
+    className="box-layout__box"
+  >
+    <Segment
+      basic={true}
+      padded={true}
+    >
+      <Header
+        as="h1"
+        textAlign="center"
+      >
+        <HeaderContent>
+          <Icon
+            as="i"
+            name="grid layout"
+          />
+          Boilerplate
+        </HeaderContent>
+      </Header>
+      <p>
+        It's time to get your expenses under control.
+      </p>
+      <Form
+        as="form"
+      >
+        <Button
+          as="button"
+          onClick={[MockFunction]}
+          primary={true}
+          type="button"
+        >
+          Login with Google
+        </Button>
+      </Form>
+    </Segment>
+  </div>
+</div>
+`;
